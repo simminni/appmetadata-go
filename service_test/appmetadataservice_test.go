@@ -1,7 +1,7 @@
 package service_test
 
 import (
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/http/httptest"
 	"strings"
@@ -90,7 +90,7 @@ func TestPostAppMetadataValidRecord1(t *testing.T) {
 
 	router.ServeHTTP(w, req)
 	assert.Equal(t, 201, w.Code)
-	responseData, _ := ioutil.ReadAll(w.Body)
+	responseData, _ := io.ReadAll(w.Body)
 	assert.Equal(t, valid_app_metadata_1, string(responseData))
 }
 
@@ -103,7 +103,7 @@ func TestPostAppMetadataValidRecord2(t *testing.T) {
 
 	router.ServeHTTP(w, req)
 	assert.Equal(t, 201, w.Code)
-	responseData, _ := ioutil.ReadAll(w.Body)
+	responseData, _ := io.ReadAll(w.Body)
 	assert.Equal(t, valid_app_metadata_2, string(responseData))
 }
 
@@ -119,7 +119,7 @@ func TestPostAppMetadataInvalidEmail(t *testing.T) {
 
 	router.ServeHTTP(w, req)
 	assert.Equal(t, 400, w.Code)
-	responseData, _ := ioutil.ReadAll(w.Body)
+	responseData, _ := io.ReadAll(w.Body)
 	assert.Equal(t, expectedError, string(responseData))
 }
 
@@ -135,6 +135,6 @@ func TestPostAppMetadataMissingVersion(t *testing.T) {
 
 	router.ServeHTTP(w, req)
 	assert.Equal(t, 400, w.Code)
-	responseData, _ := ioutil.ReadAll(w.Body)
+	responseData, _ := io.ReadAll(w.Body)
 	assert.Equal(t, expectedError, string(responseData))
 }
