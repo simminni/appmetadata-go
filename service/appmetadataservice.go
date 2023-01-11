@@ -5,15 +5,14 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/simminni/appmetadata-go/dao"
 	"github.com/simminni/appmetadata-go/model"
 )
-
-var app_metadatas = []model.App_metadata{}
 
 // service: getAppMetadata
 // getAppMetadata responds with the list of all app metadata as JSON.
 func GetAppMetadata(c *gin.Context) {
-	c.YAML(http.StatusOK, app_metadatas)
+	c.YAML(http.StatusOK, dao.GetAppMetadata)
 }
 
 // service: getAppMetadataByTiTle
@@ -21,17 +20,7 @@ func GetAppMetadata(c *gin.Context) {
 // then returns all the app metadata that match TiTle as a response.
 func GetAppMetadataByTiTle(c *gin.Context) {
 	title := c.Param("title")
-	var matching_app_metadatas []model.App_metadata
-
-	// Loop over the list of appmetadata, looking for
-	// an app metadata whose name value matches the parameter.
-	for _, a := range app_metadatas {
-		log.Println("'" + a.Title + "'")
-		log.Println("'" + title + "'")
-		if a.Title == title {
-			matching_app_metadatas = append(matching_app_metadatas, a)
-		}
-	}
+	var matching_app_metadatas = dao.GetAppMetadataByTiTle(title)
 
 	if len(matching_app_metadatas) != 0 {
 		c.YAML(http.StatusOK, matching_app_metadatas)
@@ -55,6 +44,6 @@ func PostAppMetadata(c *gin.Context) {
 	}
 
 	// Add the new album to the slice.
-	app_metadatas = append(app_metadatas, new_app_metadata)
+	dao.PostAppMetadata(new_app_metadata)
 	c.YAML(http.StatusCreated, new_app_metadata)
 }
