@@ -33,7 +33,7 @@ func GetAppMetadataByTiTle(title string) []model.App_metadata {
 // PostAppMetadata persists app metadata entry
 func PostAppMetadata(new_app_metadata model.App_metadata) model.App_metadata {
 
-	// Add the new album to the slice.
+	// Add the new metadata to the slice.
 	app_metadatas = append(app_metadatas, new_app_metadata)
 	return new_app_metadata
 }

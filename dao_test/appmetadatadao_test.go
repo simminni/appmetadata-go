@@ -18,7 +18,7 @@ func TestPostAppMetadata(t *testing.T) {
 	var new_app_metadata = model.App_metadata{
 		Title:   "Valid App 1",
 		Version: "0.0.1",
-		Maintainers: []model.Maintainer{
+		Maintainers: []model.Maintainers{
 			{
 				Name:  "firstmaintainer app1",
 				Email: "firstmaintainer@hotmail.com",

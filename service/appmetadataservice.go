@@ -10,9 +10,9 @@ import (
 )
 
 // service: getAppMetadata
-// getAppMetadata responds with the list of all app metadata as JSON.
+// getAppMetadata responds with the list of all app metadata as YAML.
 func GetAppMetadata(c *gin.Context) {
-	c.YAML(http.StatusOK, dao.GetAppMetadata)
+	c.YAML(http.StatusOK, dao.GetAppMetadata())
 }
 
 // service: getAppMetadataByTiTle
@@ -43,7 +43,7 @@ func PostAppMetadata(c *gin.Context) {
 		return
 	}
 
-	// Add the new album to the slice.
+	// persist metadata
 	dao.PostAppMetadata(new_app_metadata)
 	c.YAML(http.StatusCreated, new_app_metadata)
 }
