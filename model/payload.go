@@ -14,7 +14,7 @@ type App_metadata struct {
 	*/
 	Maintainers []Maintainer `yaml:"maintainers,omitempty" binding:"required"`
 	//company: Random Inc.
-	Company string `yaml:company binding:"required"`
+	Company string `yaml:"company" binding:"required"`
 	//website: https://website.com
 	Website string `yaml:"website" binding:"required"`
 	//source: https://github.com/random/repo
